@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dbdicom.ds.dataset &mdash; dbdicom 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> dbdicom
+            <img src="../../../_static/sheffield-logo.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">GETTING STARTED</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">dbdicom</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">dbdicom.ds.dataset</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for dbdicom.ds.dataset</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;A colections of tools to extend functionality of pydicom datasets.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="kn">import</span> <span class="nn">pydicom</span>
+<span class="kn">from</span> <span class="nn">pydicom.dataset</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">pydicom.sequence</span> <span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span> <span class="nn">pydicom.util.codify</span> <span class="kn">import</span> <span class="n">code_file</span>
+
+<span class="kn">import</span> <span class="nn">dbdicom.utils.image</span> <span class="k">as</span> <span class="nn">image</span>
+
+
+<div class="viewcode-block" id="DbDataset"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset">[docs]</a><span class="k">class</span> <span class="nc">DbDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">dataset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="vm">__dict__</span>
+
+<div class="viewcode-block" id="DbDataset.write"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.get_values"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.get_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.set_values"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.set_values">[docs]</a>    <span class="k">def</span> <span class="nf">set_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">set_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.get_lut"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.get_lut">[docs]</a>    <span class="k">def</span> <span class="nf">get_lut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="n">get_lut</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.set_lut"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.set_lut">[docs]</a>    <span class="k">def</span> <span class="nf">set_lut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> 
+        <span class="n">set_lut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.get_colormap"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.get_colormap">[docs]</a>    <span class="k">def</span> <span class="nf">get_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.set_colormap"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.set_colormap">[docs]</a>    <span class="k">def</span> <span class="nf">set_colormap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">set_colormap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="c1"># Should be just pixel_array to fit in with logic </span>
+    <span class="c1"># of custom attributes but conflicts with pydicom definition</span>
+    <span class="c1"># go back to just array?</span>
+<div class="viewcode-block" id="DbDataset.get_pixel_array"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.get_pixel_array">[docs]</a>    <span class="k">def</span> <span class="nf">get_pixel_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_pixel_array</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.set_pixel_array"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.set_pixel_array">[docs]</a>    <span class="k">def</span> <span class="nf">set_pixel_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">value_range</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">set_pixel_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">value_range</span><span class="o">=</span><span class="n">value_range</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.map_mask_to"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.map_mask_to">[docs]</a>    <span class="k">def</span> <span class="nf">map_mask_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ds_target</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">map_mask_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ds_target</span><span class="p">)</span></div>
+
+    <span class="c1">##</span>
+    <span class="c1">## CUSTOM ATTRIBUTES</span>
+    <span class="c1">## </span>
+
+<div class="viewcode-block" id="DbDataset.get_attribute_affine_matrix"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.get_attribute_affine_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">get_attribute_affine_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_affine_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.set_attribute_affine_matrix"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.set_attribute_affine_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">set_attribute_affine_matrix</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">set_affine_matrix</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.get_attribute_window"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.get_attribute_window">[docs]</a>    <span class="k">def</span> <span class="nf">get_attribute_window</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.set_attribute_window"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.set_attribute_window">[docs]</a>    <span class="k">def</span> <span class="nf">set_attribute_window</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">set_window</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.get_attribute_lut"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.get_attribute_lut">[docs]</a>    <span class="k">def</span> <span class="nf">get_attribute_lut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># use _get_attribute to encode these</span>
+        <span class="k">return</span> <span class="n">get_lut</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.set_attribute_lut"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.set_attribute_lut">[docs]</a>    <span class="k">def</span> <span class="nf">set_attribute_lut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># use _set_attribute to encode these</span>
+        <span class="n">set_lut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.get_attribute_colormap"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.get_attribute_colormap">[docs]</a>    <span class="k">def</span> <span class="nf">get_attribute_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">get_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DbDataset.set_attribute_colormap"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.DbDataset.set_attribute_colormap">[docs]</a>    <span class="k">def</span> <span class="nf">set_attribute_colormap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">set_colormap</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+
+
+<div class="viewcode-block" id="get_window"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.get_window">[docs]</a><span class="k">def</span> <span class="nf">get_window</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Centre and width of the pixel data after applying rescale slope and intercept&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="s1">&#39;WindowCenter&#39;</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span> 
+        <span class="n">centre</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">WindowCenter</span>
+    <span class="k">if</span> <span class="s1">&#39;WindowWidth&#39;</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span> 
+        <span class="n">width</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">WindowWidth</span>
+    <span class="k">if</span> <span class="n">centre</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">width</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">get_pixel_array</span><span class="p">()</span>
+        <span class="c1">#p = np.percentile(array, [25, 50, 75])</span>
+        <span class="nb">min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+        <span class="nb">max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">centre</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="n">centre</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="o">+</span><span class="nb">min</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+        <span class="c1">#centre = p[1]</span>
+    <span class="k">if</span> <span class="n">width</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="n">width</span> <span class="o">=</span> <span class="mf">0.9</span><span class="o">*</span><span class="p">(</span><span class="nb">max</span><span class="o">-</span><span class="nb">min</span><span class="p">)</span>
+        <span class="c1">#width = p[2] - p[0]</span>
+    <span class="k">return</span> <span class="n">centre</span><span class="p">,</span> <span class="n">width</span></div>
+
+<div class="viewcode-block" id="set_window"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.set_window">[docs]</a><span class="k">def</span> <span class="nf">set_window</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">WindowCenter</span> <span class="o">=</span> <span class="n">center</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">WindowWidth</span> <span class="o">=</span> <span class="n">width</span></div>
+
+
+<div class="viewcode-block" id="read"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.read">[docs]</a><span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">dialog</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">dcmread</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">DbDataset</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Failed to read &quot;</span> <span class="o">+</span> <span class="n">file</span>
+        <span class="k">if</span> <span class="n">dialog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dialog</span><span class="o">.</span><span class="n">information</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>  
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="write"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.write">[docs]</a><span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># check if directory exists and create it if not</span>
+    <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">save_as</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">write_like_original</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+    <span class="c1"># try:</span>
+    <span class="c1">#     # check if directory exists and create it if not</span>
+    <span class="c1">#     dir = os.path.dirname(file)</span>
+    <span class="c1">#     if not os.path.exists(dir):</span>
+    <span class="c1">#         os.makedirs(dir)</span>
+    <span class="c1">#     ds.save_as(file, write_like_original=False)</span>
+    <span class="c1"># except:</span>
+    <span class="c1">#     msg = &#39;Cannot write to file \n&#39; + file</span>
+    <span class="c1">#     if status is not None:</span>
+    <span class="c1">#         status.message(msg)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         print(msg)</span>
+    <span class="c1">#     raise RuntimeError</span>
+
+
+<div class="viewcode-block" id="codify"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.codify">[docs]</a><span class="k">def</span> <span class="nf">codify</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="n">save_file</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    
+    <span class="nb">str</span> <span class="o">=</span> <span class="n">code_file</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="read_data"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.read_data">[docs]</a><span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Reading DICOM folder..&#39;</span><span class="p">,</span> <span class="n">images_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads a list of tags in a list of files.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    files : str or list</span>
+<span class="sd">        A filepath or a list of filepaths</span>
+<span class="sd">    tags : str or list </span>
+<span class="sd">        A DICOM tag or a list of DICOM tags</span>
+<span class="sd">    status : StatusBar</span>
+
+<span class="sd">    Creates</span>
+<span class="sd">    -------</span>
+<span class="sd">    dataframe : pandas.DataFrame</span>
+<span class="sd">        A Pandas dataframe with one row per file</span>
+<span class="sd">        The index is the file path </span>
+<span class="sd">        Each column corresponds to a Tag in the list of Tags</span>
+<span class="sd">        The returned dataframe is sorted by the given tags.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">files</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">tags</span><span class="p">]</span>
+    <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">status</span><span class="o">.</span><span class="n">progress</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">dcmread</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">specific_tags</span><span class="o">=</span><span class="n">tags</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;Rows&#39;</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">FileDataset</span><span class="p">):</span>
+                <span class="k">if</span> <span class="s1">&#39;TransferSyntaxUID&#39;</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">file_meta</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">images_only</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;Rows&#39;</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                    <span class="n">row</span> <span class="o">=</span> <span class="n">get_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">index</span> <span class="o">=</span> <span class="n">file</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">index</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                    <span class="nb">dict</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span> 
+    <span class="k">return</span> <span class="nb">dict</span></div>
+
+
+<div class="viewcode-block" id="read_dataframe"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.read_dataframe">[docs]</a><span class="k">def</span> <span class="nf">read_dataframe</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Reading DICOM folder..&#39;</span><span class="p">,</span> <span class="n">images_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads a list of tags in a list of files.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    files : str or list</span>
+<span class="sd">        A filepath or a list of filepaths</span>
+<span class="sd">    tags : str or list </span>
+<span class="sd">        A DICOM tag or a list of DICOM tags</span>
+<span class="sd">    status : StatusBar</span>
+
+<span class="sd">    Creates</span>
+<span class="sd">    -------</span>
+<span class="sd">    dataframe : pandas.DataFrame</span>
+<span class="sd">        A Pandas dataframe with one row per file</span>
+<span class="sd">        The index is the file path </span>
+<span class="sd">        Each column corresponds to a Tag in the list of Tags</span>
+<span class="sd">        The returned dataframe is sorted by the given tags.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">files</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">tags</span><span class="p">]</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">dicom_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">status</span><span class="o">.</span><span class="n">progress</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">dcmread</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">specific_tags</span><span class="o">=</span><span class="n">tags</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;Rows&#39;</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">FileDataset</span><span class="p">):</span>
+                <span class="k">if</span> <span class="s1">&#39;TransferSyntaxUID&#39;</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">file_meta</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">images_only</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;Rows&#39;</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                    <span class="n">row</span> <span class="o">=</span> <span class="n">get_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+                    <span class="n">array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">index</span> <span class="o">=</span> <span class="n">file</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">index</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                    <span class="n">dicom_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> 
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">dicom_files</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">tags</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="set_values"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.set_values">[docs]</a><span class="k">def</span> <span class="nf">set_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">VR</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets DICOM tags in the pydicom dataset in memory</span>
+<span class="sd">    </span>
+<span class="sd">    Private and standard tags can both be set.</span>
+<span class="sd">    tags, values and VR must either be lists of equal lengths,</span>
+<span class="sd">    or single values.</span>
+<span class="sd">    VR is required for private tags. </span>
+<span class="sd">    If private and standard tags are set in the same function call, </span>
+<span class="sd">    VR can be set to any value for the standard tags: e.g. </span>
+<span class="sd">        set_values(ds, [&#39;Rows&#39;, (0x0019, 0x0100)], [128, &#39;Hello&#39;], [None, &#39;LO&#39;])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> 
+        <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">tags</span><span class="p">]</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">values</span><span class="p">]</span>
+        <span class="n">VR</span> <span class="o">=</span> <span class="p">[</span><span class="n">VR</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">VR</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">VR</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tag</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tags</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+                    <span class="c1"># Setting standard DICOM attribute to None</span>
+                    <span class="k">del</span> <span class="n">ds</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Setting custom attribute to None</span>
+                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;set_attribute_&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="p">):</span>
+                        <span class="nb">getattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;set_attribute_&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="p">)(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  
+            <span class="k">else</span><span class="p">:</span> <span class="c1"># hexadecimal tuple</span>
+                <span class="k">if</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+                    <span class="k">del</span> <span class="n">ds</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+                <span class="c1">#if tag in ds:</span>
+                    <span class="n">ds</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">format_value</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;set_attribute_&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="p">):</span>
+                        <span class="nb">getattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;set_attribute_&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="p">)(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                        <span class="k">continue</span>
+                    <span class="n">_add_new</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">VR</span><span class="o">=</span><span class="n">VR</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1"># hexadecimal tuple</span>
+                <span class="k">if</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+                    <span class="n">ds</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">format_value</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">_add_new</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">VR</span><span class="o">=</span><span class="n">VR</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">ds</span></div>
+
+
+<span class="k">def</span> <span class="nf">_add_new</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">VR</span><span class="o">=</span><span class="s1">&#39;OW&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">BaseTag</span><span class="p">):</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">Tag</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tag</span><span class="o">.</span><span class="n">is_private</span><span class="p">:</span> <span class="c1"># Add a new data element</span>
+        <span class="n">value_repr</span> <span class="o">=</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">datadict</span><span class="o">.</span><span class="n">dictionary_VR</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value_repr</span> <span class="o">==</span> <span class="s1">&#39;US or SS&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">value_repr</span> <span class="o">=</span> <span class="s1">&#39;US&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value_repr</span> <span class="o">=</span> <span class="s1">&#39;SS&#39;</span>
+        <span class="k">elif</span> <span class="n">value_repr</span> <span class="o">==</span> <span class="s1">&#39;OB or OW&#39;</span><span class="p">:</span>
+            <span class="n">value_repr</span> <span class="o">=</span> <span class="s1">&#39;OW&#39;</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">add_new</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">value_repr</span><span class="p">,</span> <span class="n">format_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">value_repr</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="mh">0x0010</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+            <span class="n">ds</span><span class="o">.</span><span class="n">private_block</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="s1">&#39;Wezel &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">group</span><span class="p">),</span> <span class="n">create</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">add_new</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">VR</span><span class="p">,</span> <span class="n">format_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">VR</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="get_values"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.get_values">[docs]</a><span class="k">def</span> <span class="nf">get_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tags</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a list of values for a dataset&quot;&quot;&quot;</span>
+
+    <span class="c1"># https://pydicom.github.io/pydicom/stable/guides/element_value_types.html</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="n">get_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="p">[</span><span class="n">tags</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+            
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>  
+    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;get_attribute_&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="p">):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;get_attribute_&#39;</span> <span class="o">+</span> <span class="n">tag</span><span class="p">)()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">to_set_type</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># tuple of hexadecimal values</span>
+            <span class="k">if</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">to_set_type</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">row</span></div>
+
+
+<div class="viewcode-block" id="format_value"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.format_value">[docs]</a><span class="k">def</span> <span class="nf">format_value</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">VR</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">VR</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">VR</span> <span class="o">=</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">datadict</span><span class="o">.</span><span class="n">dictionary_VR</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">VR</span> <span class="o">==</span> <span class="s1">&#39;LO&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">64</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span><span class="p">[</span><span class="o">-</span><span class="mi">64</span><span class="p">:]</span>
+            <span class="c1">#return value[:64]</span>
+
+    <span class="k">return</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="to_set_type"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.to_set_type">[docs]</a><span class="k">def</span> <span class="nf">to_set_type</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert pydicom datatypes to the python datatypes used to set the parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;MultiValue&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">to_set_type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;PersonName&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;Sequence&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">ds</span> <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;TM&#39;</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;UID&#39;</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;IS&#39;</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;DT&#39;</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;DA&#39;</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;DSfloat&#39;</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;DSdecimal&#39;</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="new_uid"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.new_uid">[docs]</a><span class="k">def</span> <span class="nf">new_uid</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pydicom</span><span class="o">.</span><span class="n">uid</span><span class="o">.</span><span class="n">generate_uid</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">pydicom</span><span class="o">.</span><span class="n">uid</span><span class="o">.</span><span class="n">generate_uid</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="get_affine_matrix"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.get_affine_matrix">[docs]</a><span class="k">def</span> <span class="nf">get_affine_matrix</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Affine transformation matrix for a DICOM image&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">affine_matrix</span><span class="p">(</span>
+        <span class="n">get_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;ImageOrientationPatient&#39;</span><span class="p">),</span> 
+        <span class="n">get_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;ImagePositionPatient&#39;</span><span class="p">),</span> 
+        <span class="n">get_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;PixelSpacing&#39;</span><span class="p">),</span> 
+        <span class="n">get_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;SliceThickness&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="set_affine_matrix"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.set_affine_matrix">[docs]</a><span class="k">def</span> <span class="nf">set_affine_matrix</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">affine</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">dismantle_affine_matrix</span><span class="p">(</span><span class="n">affine</span><span class="p">)</span>
+    <span class="n">set_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;PixelSpacing&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;PixelSpacing&#39;</span><span class="p">])</span>
+    <span class="n">set_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;SliceThickness&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;SliceThickness&#39;</span><span class="p">])</span>
+    <span class="n">set_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;ImageOrientationPatient&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;ImageOrientationPatient&#39;</span><span class="p">])</span>
+    <span class="n">set_values</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;ImagePositionPatient&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;ImagePositionPatient&#39;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="map_mask_to"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.map_mask_to">[docs]</a><span class="k">def</span> <span class="nf">map_mask_to</span><span class="p">(</span><span class="n">ds_source</span><span class="p">,</span> <span class="n">ds_target</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map non-zero image pixels onto a target image.</span>
+<span class="sd">    </span>
+<span class="sd">    Overwrite pixel values in the target&quot;&quot;&quot;</span>
+
+    <span class="c1"># Create a coordinate array of non-zero pixels</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ds_source</span><span class="o">.</span><span class="n">get_pixel_array</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))</span> 
+    <span class="n">coords</span> <span class="o">=</span> <span class="p">[[</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">]</span> 
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+
+    <span class="c1"># Determine coordinate transformation matrix</span>
+    <span class="n">affine_source</span> <span class="o">=</span> <span class="n">ds_source</span><span class="o">.</span><span class="n">get_values</span><span class="p">(</span><span class="s1">&#39;affine_matrix&#39;</span><span class="p">)</span>
+    <span class="n">affine_target</span> <span class="o">=</span> <span class="n">ds_target</span><span class="o">.</span><span class="n">get_values</span><span class="p">(</span><span class="s1">&#39;affine_matrix&#39;</span><span class="p">)</span>
+    <span class="n">source_to_target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">affine_target</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">affine_source</span><span class="p">)</span>
+
+    <span class="c1"># Apply coordinate transformation and interpolate (nearest neighbour)</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">affines</span><span class="o">.</span><span class="n">apply_affine</span><span class="p">(</span><span class="n">source_to_target</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="c1"># x = y = []</span>
+    <span class="c1"># for r in coords:</span>
+    <span class="c1">#     if r[2] == 0:</span>
+    <span class="c1">#         if (0 &lt;= r[0]) &amp; (r[0] &lt; ds_target.Columns):</span>
+    <span class="c1">#             if (0 &lt;= r[1]) &amp; (r[1] &lt; ds_target.Rows):</span>
+    <span class="c1">#                 x.append(r[0])</span>
+    <span class="c1">#                 y.append(r[1])</span>
+    <span class="c1"># x = tuple(x)</span>
+    <span class="c1"># y = tuple(y)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coords</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ds_target</span><span class="o">.</span><span class="n">Columns</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ds_target</span><span class="o">.</span><span class="n">Rows</span><span class="p">)])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coords</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ds_target</span><span class="o">.</span><span class="n">Columns</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ds_target</span><span class="o">.</span><span class="n">Rows</span><span class="p">)])</span>
+    <span class="c1"># x = tuple([c[0] for c in coords if c[2] == 0])</span>
+    <span class="c1"># y = tuple([c[1] for c in coords if c[2] == 0])</span>
+
+    <span class="c1"># Set values in the target image</span>
+    <span class="c1"># array = np.zeros((record.Rows, record.Columns))</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ds_target</span><span class="o">.</span><span class="n">Columns</span><span class="p">,</span> <span class="n">ds_target</span><span class="o">.</span><span class="n">Rows</span><span class="p">))</span>
+    <span class="n">array</span><span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">return</span> <span class="n">array</span></div>
+
+<span class="c1"># List of all supported (matplotlib) colormaps</span>
+
+<span class="n">COLORMAPS</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;cividis&#39;</span><span class="p">,</span>  <span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="s1">&#39;plasma&#39;</span><span class="p">,</span> <span class="s1">&#39;viridis&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;Purples&#39;</span><span class="p">,</span> <span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="s1">&#39;Greens&#39;</span><span class="p">,</span> <span class="s1">&#39;Oranges&#39;</span><span class="p">,</span> <span class="s1">&#39;Reds&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;YlOrBr&#39;</span><span class="p">,</span> <span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="s1">&#39;OrRd&#39;</span><span class="p">,</span> <span class="s1">&#39;PuRd&#39;</span><span class="p">,</span> <span class="s1">&#39;RdPu&#39;</span><span class="p">,</span> <span class="s1">&#39;BuPu&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GnBu&#39;</span><span class="p">,</span> <span class="s1">&#39;PuBu&#39;</span><span class="p">,</span> <span class="s1">&#39;YlGnBu&#39;</span><span class="p">,</span> <span class="s1">&#39;PuBuGn&#39;</span><span class="p">,</span> <span class="s1">&#39;BuGn&#39;</span><span class="p">,</span> <span class="s1">&#39;YlGn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;binary&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_yarg&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_gray&#39;</span><span class="p">,</span> <span class="s1">&#39;bone&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="s1">&#39;summer&#39;</span><span class="p">,</span> <span class="s1">&#39;autumn&#39;</span><span class="p">,</span> <span class="s1">&#39;winter&#39;</span><span class="p">,</span> <span class="s1">&#39;cool&#39;</span><span class="p">,</span> <span class="s1">&#39;Wistia&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;hot&#39;</span><span class="p">,</span> <span class="s1">&#39;afmhot&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_heat&#39;</span><span class="p">,</span> <span class="s1">&#39;copper&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PiYG&#39;</span><span class="p">,</span> <span class="s1">&#39;PRGn&#39;</span><span class="p">,</span> <span class="s1">&#39;BrBG&#39;</span><span class="p">,</span> <span class="s1">&#39;PuOr&#39;</span><span class="p">,</span> <span class="s1">&#39;RdGy&#39;</span><span class="p">,</span> <span class="s1">&#39;RdBu&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RdYlBu&#39;</span><span class="p">,</span> <span class="s1">&#39;RdYlGn&#39;</span><span class="p">,</span> <span class="s1">&#39;Spectral&#39;</span><span class="p">,</span> <span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="s1">&#39;seismic&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;twilight&#39;</span><span class="p">,</span> <span class="s1">&#39;twilight_shifted&#39;</span><span class="p">,</span> <span class="s1">&#39;hsv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;flag&#39;</span><span class="p">,</span> <span class="s1">&#39;prism&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_earth&#39;</span><span class="p">,</span> <span class="s1">&#39;terrain&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_stern&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gnuplot&#39;</span><span class="p">,</span> <span class="s1">&#39;gnuplot2&#39;</span><span class="p">,</span> <span class="s1">&#39;CMRmap&#39;</span><span class="p">,</span> <span class="s1">&#39;cubehelix&#39;</span><span class="p">,</span> <span class="s1">&#39;brg&#39;</span><span class="p">,</span> <span class="s1">&#39;turbo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gist_rainbow&#39;</span><span class="p">,</span> <span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="s1">&#39;nipy_spectral&#39;</span><span class="p">,</span> <span class="s1">&#39;gist_ncar&#39;</span><span class="p">]</span>
+
+<span class="c1"># Include support for DICOM natiove colormaps (see pydicom guide on working with pixel data)</span>
+
+<div class="viewcode-block" id="get_colormap"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.get_colormap">[docs]</a><span class="k">def</span> <span class="nf">get_colormap</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the colormap if there is any.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Hijacking this free text field to store the colormap</span>
+    <span class="c1"># This should use ContentDescription instead (0070, 0081)</span>
+    <span class="c1"># </span>
+    <span class="k">if</span> <span class="s1">&#39;WindowCenterWidthExplanation&#39;</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">WindowCenterWidthExplanation</span> <span class="ow">in</span> <span class="n">COLORMAPS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ds</span><span class="o">.</span><span class="n">WindowCenterWidthExplanation</span></div>
+
+
+<div class="viewcode-block" id="set_colormap"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.set_colormap">[docs]</a><span class="k">def</span> <span class="nf">set_colormap</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">colormap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">PhotometricInterpretation</span> <span class="o">=</span> <span class="s1">&#39;MONOCHROME2&#39;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;WindowCenterWidthExplanation&#39;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">ds</span><span class="o">.</span><span class="n">WindowCenterWidthExplanation</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;RGBLUTTransferFunction&#39;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">ds</span><span class="o">.</span><span class="n">RGBLUTTransferFunction</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;GreenPaletteColorLookupTableData&#39;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">ds</span><span class="o">.</span><span class="n">GreenPaletteColorLookupTableData</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;RedPaletteColorLookupTableData&#39;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">ds</span><span class="o">.</span><span class="n">RedPaletteColorLookupTableData</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;BluePaletteColorLookupTableData&#39;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">ds</span><span class="o">.</span><span class="n">BluePaletteColorLookupTableData</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;RedPaletteColorLookupTableDescriptor&#39;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">ds</span><span class="o">.</span><span class="n">RedPaletteColorLookupTableDescriptor</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;GreenPaletteColorLookupTableDescriptor&#39;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">ds</span><span class="o">.</span><span class="n">GreenPaletteColorLookupTableDescriptor</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;BluePaletteColorLookupTableDescriptor&#39;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">ds</span><span class="o">.</span><span class="n">BluePaletteColorLookupTableDescriptor</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">WindowCenterWidthExplanation</span> <span class="o">=</span> <span class="n">colormap</span>
+        <span class="c1"># Get a LUT as float numpy array with values in the range [0,1]</span>
+        <span class="n">RGBA</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">)</span><span class="o">.</span><span class="n">to_rgba</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+        <span class="n">set_lut</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">RGBA</span><span class="p">[:,:</span><span class="mi">3</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="set_lut"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.set_lut">[docs]</a><span class="k">def</span> <span class="nf">set_lut</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">RGB</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set RGB as float with values in range [0,1]&quot;&quot;&quot;</span>
+
+    <span class="n">ds</span><span class="o">.</span><span class="n">PhotometricInterpretation</span> <span class="o">=</span> <span class="s1">&#39;PALETTE COLOR&#39;</span>
+
+    <span class="n">RGB</span> <span class="o">*=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="n">RGB</span> <span class="o">=</span> <span class="n">RGB</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ubyte</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span> <span class="o">==</span> <span class="mi">16</span><span class="p">:</span>
+        <span class="n">RGB</span> <span class="o">=</span> <span class="n">RGB</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+
+    <span class="c1"># Define the properties of the LUT</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">add_new</span><span class="p">(</span><span class="s1">&#39;0x00281101&#39;</span><span class="p">,</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span><span class="p">])</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">add_new</span><span class="p">(</span><span class="s1">&#39;0x00281102&#39;</span><span class="p">,</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span><span class="p">])</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">add_new</span><span class="p">(</span><span class="s1">&#39;0x00281103&#39;</span><span class="p">,</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span><span class="p">])</span>
+
+    <span class="c1"># Scale the colorsList to the available range</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">RedPaletteColorLookupTableData</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">RGB</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">GreenPaletteColorLookupTableData</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">RGB</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">BluePaletteColorLookupTableData</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">RGB</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="get_lut"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.get_lut">[docs]</a><span class="k">def</span> <span class="nf">get_lut</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return RGB as float with values in [0,1]&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="s1">&#39;PhotometricInterpretation&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">PhotometricInterpretation</span> <span class="o">!=</span> <span class="s1">&#39;PALETTE COLOR&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ubyte</span>
+    <span class="k">elif</span> <span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span> <span class="o">==</span> <span class="mi">16</span><span class="p">:</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint16</span>
+    
+    <span class="n">R</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">RedPaletteColorLookupTableData</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">GreenPaletteColorLookupTableData</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">BluePaletteColorLookupTableData</span>
+
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="n">R</span> <span class="o">*=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">RedPaletteColorLookupTableDescriptor</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">*=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">GreenPaletteColorLookupTableDescriptor</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">*=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">BluePaletteColorLookupTableDescriptor</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">([</span><span class="n">R</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">B</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="get_pixel_array"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.get_pixel_array">[docs]</a><span class="k">def</span> <span class="nf">get_pixel_array</span><span class="p">(</span><span class="n">ds</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read the pixel array from an image&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">pixel_array</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;RescaleSlope&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> 
+    <span class="n">intercept</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="s1">&#39;RescaleIntercept&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> 
+    <span class="n">array</span> <span class="o">*=</span> <span class="n">slope</span>
+    <span class="n">array</span> <span class="o">+=</span> <span class="n">intercept</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">array</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="set_pixel_array"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.set_pixel_array">[docs]</a><span class="k">def</span> <span class="nf">set_pixel_array</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">value_range</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    
+    <span class="c1"># if array.ndim &gt;= 3: # remove spurious dimensions of 1</span>
+    <span class="c1">#     array = np.squeeze(array) </span>
+
+    <span class="n">array</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">value_range</span><span class="o">=</span><span class="n">value_range</span><span class="p">)</span>
+    <span class="n">array</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">scale_to_range</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span><span class="p">)</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+
+    <span class="c1">#maximum = np.amax(array)</span>
+    <span class="c1">#minimum = np.amin(array)</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+
+    <span class="n">ds</span><span class="o">.</span><span class="n">PixelRepresentation</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#ds.SmallestImagePixelValue = int(0)</span>
+    <span class="c1">#ds.LargestImagePixelValue = int(2**ds.BitsAllocated - 1)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="s1">&#39;SmallestImagePixelValue&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="s1">&#39;LargestImagePixelValue&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">ds</span><span class="o">.</span><span class="n">BitsAllocated</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">RescaleSlope</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">slope</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">RescaleIntercept</span> <span class="o">=</span> <span class="o">-</span> <span class="n">intercept</span> <span class="o">/</span> <span class="n">slope</span>
+<span class="c1">#        ds.WindowCenter = (maximum + minimum) / 2</span>
+<span class="c1">#        ds.WindowWidth = maximum - minimum</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">Rows</span> <span class="o">=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">Columns</span> <span class="o">=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">PixelData</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="module_patient"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.module_patient">[docs]</a><span class="k">def</span> <span class="nf">module_patient</span><span class="p">():</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s1">&#39;ReferencedPatientSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;IssuerOfPatientID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;TypeOfPatientID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;IssuerOfPatientIDQualifiersSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SourcePatientGroupIdentificationSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;GroupOfPatientsIdentificationSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientBirthDate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientBirthTime&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientBirthDateInAlternativeCalendar&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientDeathDateInAlternativeCalendar&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientAlternativeCalendar&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientSex&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;QualityControlSubject&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;StrainDescription&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;StrainNomenclature&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;StrainStockSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;StrainAdditionalInformation&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;StrainCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;GeneticModificationsSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OtherPatientNames&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OtherPatientIDsSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReferencedPatientPhotoSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;EthnicGroup&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientSpeciesDescription&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientSpeciesCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientBreedDescription&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientBreedCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BreedRegistrationSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ResponsiblePerson&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ResponsiblePersonRole&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ResponsibleOrganization&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientComments&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientIdentityRemoved&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;DeidentificationMethod&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;DeidentificationMethodCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialSponsorName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialProtocolID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialProtocolName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialSiteID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialSiteName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialSubjectID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialSubjectReadingID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialProtocolEthicsCommitteeName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialProtocolEthicsCommitteeApprovalNumber&#39;</span><span class="p">,</span>
+    <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="module_study"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.module_study">[docs]</a><span class="k">def</span> <span class="nf">module_study</span><span class="p">():</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s1">&#39;StudyDate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;StudyTime&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;AccessionNumber&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;IssuerOfAccessionNumberSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReferringPhysicianName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReferringPhysicianIdentificationSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ConsultingPhysicianName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ConsultingPhysicianIdentificationSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;StudyDescription&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ProcedureCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PhysiciansOfRecord&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PhysiciansOfRecordIdentificationSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NameOfPhysiciansReadingStudy&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PhysiciansReadingStudyIdentificationSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReferencedStudySequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;StudyInstanceUID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;StudyID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;RequestingService&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;RequestingServiceCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReasonForPerformedProcedureCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;AdmittingDiagnosesDescription&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;AdmittingDiagnosesCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientAge&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientSize&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientSizeCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientBodyMassIndex&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MeasuredAPDimension&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MeasuredLateralDimension&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientWeight&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MedicalAlerts&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Allergies&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Occupation&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SmokingStatus&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;AdditionalPatientHistory&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PregnancyStatus&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;LastMenstrualDate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientSexNeutered&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReasonForVisit&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReasonForVisitCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;AdmissionID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;IssuerOfAdmissionIDSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ServiceEpisodeID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ServiceEpisodeDescription&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;IssuerOfServiceEpisodeIDSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientState&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialTimePointID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialTimePointDescription&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;LongitudinalTemporalOffsetFromEvent&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;LongitudinalTemporalEventType&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ConsentForClinicalTrialUseSequence&#39;</span><span class="p">,</span>
+    <span class="p">]</span>   </div>
+
+
+<div class="viewcode-block" id="module_series"><a class="viewcode-back" href="../../../dbdicom.ds.html#dbdicom.ds.dataset.module_series">[docs]</a><span class="k">def</span> <span class="nf">module_series</span><span class="p">():</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s1">&#39;SeriesDate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SeriesTime&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Modality&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SeriesDescription&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SeriesDescriptionCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PerformingPhysicianName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PerformingPhysicianIdentificationSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OperatorsName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;OperatorIdentificationSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReferencedPerformedProcedureStepSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;RelatedSeriesSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;AnatomicalOrientationType&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;BodyPartExamined&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ProtocolName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PatientPosition&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReferencedDefinedProtocolSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ReferencedPerformedProtocolSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SeriesInstanceUID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SeriesNumber&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Laterality&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;SmallestPixelValueInSeries&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;LargestPixelValueInSeries&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PerformedProcedureStepStartDate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PerformedProcedureStepStartTime&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PerformedProcedureStepEndDate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PerformedProcedureStepEndTime&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PerformedProcedureStepID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PerformedProcedureStepDescription&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PerformedProtocolCodeSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;RequestAttributesSequence&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;CommentsOnThePerformedProcedureStep&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialCoordinatingCenterName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialSeriesID&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ClinicalTrialSeriesDescription&#39;</span><span class="p">,</span>
+    <span class="p">]</span></div>
+
+
+<span class="c1"># def _initialize(ds, UID=None, ref=None): # ds is pydicom dataset</span>
+
+<span class="c1">#     # Date and Time of Creation</span>
+<span class="c1">#     dt = datetime.now()</span>
+<span class="c1">#     timeStr = dt.strftime(&#39;%H%M%S&#39;)  # long format with micro seconds</span>
+
+<span class="c1">#     ds.ContentDate = dt.strftime(&#39;%Y%m%d&#39;)</span>
+<span class="c1">#     ds.ContentTime = timeStr</span>
+<span class="c1">#     ds.AcquisitionDate = dt.strftime(&#39;%Y%m%d&#39;)</span>
+<span class="c1">#     ds.AcquisitionTime = timeStr</span>
+<span class="c1">#     ds.SeriesDate = dt.strftime(&#39;%Y%m%d&#39;)</span>
+<span class="c1">#     ds.SeriesTime = timeStr</span>
+<span class="c1">#     ds.InstanceCreationDate = dt.strftime(&#39;%Y%m%d&#39;)</span>
+<span class="c1">#     ds.InstanceCreationTime = timeStr</span>
+
+<span class="c1">#     if UID is not None:</span>
+
+<span class="c1">#         # overwrite UIDs</span>
+<span class="c1">#         ds.PatientID = UID[0]</span>
+<span class="c1">#         ds.StudyInstanceUID = UID[1]</span>
+<span class="c1">#         ds.SeriesInstanceUID = UID[2]</span>
+<span class="c1">#         ds.SOPInstanceUID = UID[3]</span>
+
+<span class="c1">#     if ref is not None: </span>
+
+<span class="c1">#         # Series, Instance and Class for Reference</span>
+<span class="c1">#         refd_instance = Dataset()</span>
+<span class="c1">#         refd_instance.ReferencedSOPClassUID = ref.SOPClassUID</span>
+<span class="c1">#         refd_instance.ReferencedSOPInstanceUID = ref.SOPInstanceUID</span>
+
+<span class="c1">#         refd_series = Dataset()</span>
+<span class="c1">#         refd_series.ReferencedInstanceSequence = Sequence([refd_instance])</span>
+<span class="c1">#         refd_series.SeriesInstanceUID = ds.SeriesInstanceUID</span>
+
+<span class="c1">#         ds.ReferencedSeriesSequence = Sequence([refd_series])</span>
+
+<span class="c1">#     return ds</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, QIB-Sheffield.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dbdicom package &mdash; dbdicom 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> dbdicom
+            <img src="_static/sheffield-logo.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">GETTING STARTED</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dbdicom</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">dbdicom package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dbdicom.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dbdicom-package">
+<h1>dbdicom package<a class="headerlink" href="#dbdicom-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dbdicom.ds.html">dbdicom.ds package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbdicom.external.html">dbdicom.external package</a></li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-dbdicom.create">
+<span id="dbdicom-create-module"></span><h2>dbdicom.create module<a class="headerlink" href="#module-dbdicom.create" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.create.create">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.create.</span></span><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Database'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/create.html#create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.create.create" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.create.database">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.create.</span></span><span class="sig-name descname"><span class="pre">database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/create.html#database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.create.database" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.create.series">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.create.</span></span><span class="sig-name descname"><span class="pre">series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixels_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/create.html#series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.create.series" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.create.zeros">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.create.</span></span><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mri'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/create.html#zeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.create.zeros" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-dbdicom.manager">
+<span id="dbdicom-manager-module"></span><h2>dbdicom.manager module<a class="headerlink" href="#module-dbdicom.manager" title="Permalink to this heading"></a></h2>
+<p>Maintains an index of all files on disk.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="dbdicom.manager.DatabaseCorrupted">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dbdicom.manager.</span></span><span class="sig-name descname"><span class="pre">DatabaseCorrupted</span></span><a class="reference internal" href="_modules/dbdicom/manager.html#DatabaseCorrupted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.DatabaseCorrupted" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dbdicom.manager.</span></span><span class="sig-name descname"><span class="pre">Manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status=&lt;dbdicom.message.StatusBar</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialog=&lt;dbdicom.message.Dialog</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Programming interface for reading and writing a DICOM folder.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.clear" title="Permalink to this definition"></a></dt>
+<dd><p>Clear all data from memory</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.close" title="Permalink to this definition"></a></dt>
+<dd><p>Close an open database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.columns">
+<span class="sig-name descname"><span class="pre">columns</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['PatientID',</span> <span class="pre">'StudyInstanceUID',</span> <span class="pre">'SeriesInstanceUID',</span> <span class="pre">'SOPInstanceUID',</span> <span class="pre">'SOPClassUID',</span> <span class="pre">'PatientName',</span> <span class="pre">'StudyDescription',</span> <span class="pre">'StudyDate',</span> <span class="pre">'SeriesDescription',</span> <span class="pre">'SeriesNumber',</span> <span class="pre">'InstanceNumber',</span> <span class="pre">'ImageOrientationPatient',</span> <span class="pre">'ImagePositionPatient',</span> <span class="pre">'PixelSpacing',</span> <span class="pre">'SliceThickness',</span> <span class="pre">'SliceLocation',</span> <span class="pre">'AcquisitionTime']</span></em><a class="headerlink" href="#dbdicom.manager.Manager.columns" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.copy_instance_to_series">
+<span class="sig-name descname"><span class="pre">copy_instance_to_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_keys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmp</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.copy_instance_to_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.copy_instance_to_series" title="Permalink to this definition"></a></dt>
+<dd><p>Copy instances to another series</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.copy_to_database">
+<span class="sig-name descname"><span class="pre">copy_to_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.copy_to_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.copy_to_database" title="Permalink to this definition"></a></dt>
+<dd><p>Copy patient to the database</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.copy_to_patient">
+<span class="sig-name descname"><span class="pre">copy_to_patient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_key</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.copy_to_patient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.copy_to_patient" title="Permalink to this definition"></a></dt>
+<dd><p>Copy studies to another patient</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.copy_to_series">
+<span class="sig-name descname"><span class="pre">copy_to_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.copy_to_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.copy_to_series" title="Permalink to this definition"></a></dt>
+<dd><p>Copy instances to another series</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.copy_to_study">
+<span class="sig-name descname"><span class="pre">copy_to_study</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.copy_to_study"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.copy_to_study" title="Permalink to this definition"></a></dt>
+<dd><p>Copy series to another study</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.default">
+<span class="sig-name descname"><span class="pre">default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.default" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.delete" title="Permalink to this definition"></a></dt>
+<dd><p>Deletes some datasets</p>
+<p>Deleted datasets are stashed and can be recovered with restore()
+Using save() will delete them permanently</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.delete_series">
+<span class="sig-name descname"><span class="pre">delete_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.delete_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.delete_series" title="Permalink to this definition"></a></dt>
+<dd><p>Delete a list of series</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.delete_studies">
+<span class="sig-name descname"><span class="pre">delete_studies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">studies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.delete_studies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.delete_studies" title="Permalink to this definition"></a></dt>
+<dd><p>Delete a list of studies</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.drop_if_missing">
+<span class="sig-name descname"><span class="pre">drop_if_missing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SOPInstanceUID'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.drop_if_missing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.drop_if_missing" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.export_datasets">
+<span class="sig-name descname"><span class="pre">export_datasets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.export_datasets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.export_datasets" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.extend">
+<span class="sig-name descname"><span class="pre">extend</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.extend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.extend" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.filepath">
+<span class="sig-name descname"><span class="pre">filepath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.filepath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.filepath" title="Permalink to this definition"></a></dt>
+<dd><p>Return the full filepath for a given relative path.</p>
+<p>Returns None for data that live in memory only.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.filepaths">
+<span class="sig-name descname"><span class="pre">filepaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.filepaths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.filepaths" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of full filepaths for all dicom files in the folder</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.filter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.filter_instances">
+<span class="sig-name descname"><span class="pre">filter_instances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.filter_instances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.filter_instances" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.get_dataset">
+<span class="sig-name descname"><span class="pre">get_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.get_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.get_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Gets a list of datasets for a single record</p>
+<p>Datasets in memory will be returned.
+If they are not in memory, and the database exists on disk, they will be read from disk.
+If they are not in memory, and the database does not exist on disk, an exception is raised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.get_instance_dataset">
+<span class="sig-name descname"><span class="pre">get_instance_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.get_instance_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.get_instance_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Gets a datasets for a single instance</p>
+<p>Datasets in memory will be returned.
+If they are not in memory, and the database exists on disk, they will be read from disk.
+If they are not in memory, and the database does not exist on disk, an exception is raised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.get_values">
+<span class="sig-name descname"><span class="pre">get_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.get_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.get_values" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.import_datasets">
+<span class="sig-name descname"><span class="pre">import_datasets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.import_datasets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.import_datasets" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.instances">
+<span class="sig-name descname"><span class="pre">instances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sortby</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.instances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.instances" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.is_open">
+<span class="sig-name descname"><span class="pre">is_open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.is_open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.is_open" title="Permalink to this definition"></a></dt>
+<dd><p>Check if a database is currently open, either in memory or on disk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if a database is open and False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.is_saved">
+<span class="sig-name descname"><span class="pre">is_saved</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.is_saved"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.is_saved" title="Permalink to this definition"></a></dt>
+<dd><p>Check if the folder is saved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the folder is saved and False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">study</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">series</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.keys" title="Permalink to this definition"></a></dt>
+<dd><p>Return a list of indices for all dicom datasets managed by the index.</p>
+<p>These indices are strings with unique relative paths
+that either link to an existing file in the database or can be used for
+writing a database that is in memory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.label">
+<span class="sig-name descname"><span class="pre">label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.label" title="Permalink to this definition"></a></dt>
+<dd><p>Return a label to describe a row as Patient, Study, Series or Instance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.move_to">
+<span class="sig-name descname"><span class="pre">move_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.move_to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.move_to" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.move_to_patient">
+<span class="sig-name descname"><span class="pre">move_to_patient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.move_to_patient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.move_to_patient" title="Permalink to this definition"></a></dt>
+<dd><p>Copy series to another study</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.move_to_series">
+<span class="sig-name descname"><span class="pre">move_to_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.move_to_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.move_to_series" title="Permalink to this definition"></a></dt>
+<dd><p>Copy datasets to another series</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.move_to_study">
+<span class="sig-name descname"><span class="pre">move_to_study</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.move_to_study"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.move_to_study" title="Permalink to this definition"></a></dt>
+<dd><p>Copy series to another study</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.new_instance">
+<span class="sig-name descname"><span class="pre">new_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.new_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.new_instance" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.new_key">
+<span class="sig-name descname"><span class="pre">new_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.new_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.new_key" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a new key</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.new_patient">
+<span class="sig-name descname"><span class="pre">new_patient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Database'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.new_patient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.new_patient" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.new_series">
+<span class="sig-name descname"><span class="pre">new_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.new_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.new_series" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.new_study">
+<span class="sig-name descname"><span class="pre">new_study</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.new_study"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.new_study" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.npy">
+<span class="sig-name descname"><span class="pre">npy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.npy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.npy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unzip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.open" title="Permalink to this definition"></a></dt>
+<dd><p>Opens a DICOM folder for read and write.</p>
+<p>Reads the contents of the folder and summarises all DICOM files
+in a dataframe for faster access next time. The dataframe is saved
+as a pkl file when the folder is closed with <cite>.close()</cite>.
+All non-DICOM files in the folder are ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – The full path to the directory that is to be opened.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.parent">
+<span class="sig-name descname"><span class="pre">parent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.parent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.parent" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the UID of the parent object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.patient_header">
+<span class="sig-name descname"><span class="pre">patient_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.patient_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.patient_header" title="Permalink to this definition"></a></dt>
+<dd><p>Attributes and values inherited from series, study and patient</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.patients">
+<span class="sig-name descname"><span class="pre">patients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.patients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.patients" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.pause_extensions">
+<span class="sig-name descname"><span class="pre">pause_extensions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.pause_extensions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.pause_extensions" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.print">
+<span class="sig-name descname"><span class="pre">print</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.print"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.print" title="Permalink to this definition"></a></dt>
+<dd><p>Prints a summary of the project folder to the terminal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.read" title="Permalink to this definition"></a></dt>
+<dd><p>Read the dataset from disk.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.restore" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.resume_extensions">
+<span class="sig-name descname"><span class="pre">resume_extensions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.resume_extensions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.resume_extensions" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.save" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.scan">
+<span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unzip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.scan" title="Permalink to this definition"></a></dt>
+<dd><p>Reads all files in the folder and summarises key attributes in a table for faster access.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.series">
+<span class="sig-name descname"><span class="pre">series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sortby</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.series" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.series_header">
+<span class="sig-name descname"><span class="pre">series_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.series_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.series_header" title="Permalink to this definition"></a></dt>
+<dd><p>Attributes and values inherited from series, study and patient</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.set_dataset">
+<span class="sig-name descname"><span class="pre">set_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.set_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.set_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.set_instance_dataset">
+<span class="sig-name descname"><span class="pre">set_instance_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.set_instance_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.set_instance_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.set_values">
+<span class="sig-name descname"><span class="pre">set_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.set_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.set_values" title="Permalink to this definition"></a></dt>
+<dd><p>Set values in a dataset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.studies">
+<span class="sig-name descname"><span class="pre">studies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.studies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.studies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.study_header">
+<span class="sig-name descname"><span class="pre">study_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.study_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.study_header" title="Permalink to this definition"></a></dt>
+<dd><p>Attributes and values inherited from series, study and patient</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.tree">
+<span class="sig-name descname"><span class="pre">tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.tree" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.type">
+<span class="sig-name descname"><span class="pre">type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.type" title="Permalink to this definition"></a></dt>
+<dd><p>Is the UID a patient, study, series or dataset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.value" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.write" title="Permalink to this definition"></a></dt>
+<dd><p>Writing data from memory to disk.</p>
+<p>This does nothing if the data are not in memory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.manager.Manager.write_csv">
+<span class="sig-name descname"><span class="pre">write_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/manager.html#Manager.write_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.manager.Manager.write_csv" title="Permalink to this definition"></a></dt>
+<dd><p>Writes the dataFrame as a .csv file for visual inspection</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dbdicom.message">
+<span id="dbdicom-message-module"></span><h2>dbdicom.message module<a class="headerlink" href="#module-dbdicom.message" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dbdicom.message.Dialog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dbdicom.message.</span></span><span class="sig-name descname"><span class="pre">Dialog</span></span><a class="reference internal" href="_modules/dbdicom/message.html#Dialog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.Dialog" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class with the same interface as widgets.Dialog for commandline operation</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.Dialog.directory">
+<span class="sig-name descname"><span class="pre">directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Please</span> <span class="pre">provide</span> <span class="pre">a</span> <span class="pre">folder'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datafolder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#Dialog.directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.Dialog.directory" title="Permalink to this definition"></a></dt>
+<dd><p>Select a directory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.Dialog.error">
+<span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Message</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">box'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#Dialog.error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.Dialog.error" title="Permalink to this definition"></a></dt>
+<dd><p>Error message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.Dialog.file_to_open">
+<span class="sig-name descname"><span class="pre">file_to_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Open</span> <span class="pre">file..'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'All</span> <span class="pre">files</span> <span class="pre">(*.*)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datafolder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#Dialog.file_to_open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.Dialog.file_to_open" title="Permalink to this definition"></a></dt>
+<dd><p>Select a file to read.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.Dialog.file_to_save">
+<span class="sig-name descname"><span class="pre">file_to_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Save</span> <span class="pre">as</span> <span class="pre">...'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'All</span> <span class="pre">files</span> <span class="pre">(*.*)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datafolder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#Dialog.file_to_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.Dialog.file_to_save" title="Permalink to this definition"></a></dt>
+<dd><p>Select a filename to save.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.Dialog.information">
+<span class="sig-name descname"><span class="pre">information</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Message</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">box'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#Dialog.information"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.Dialog.information" title="Permalink to this definition"></a></dt>
+<dd><p>Information message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.Dialog.input">
+<span class="sig-name descname"><span class="pre">input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'User</span> <span class="pre">input</span> <span class="pre">window'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#Dialog.input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.Dialog.input" title="Permalink to this definition"></a></dt>
+<dd><p>Collect user input of various types.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.Dialog.question">
+<span class="sig-name descname"><span class="pre">question</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Do</span> <span class="pre">you</span> <span class="pre">wish</span> <span class="pre">to</span> <span class="pre">proceed?'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Question'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cancel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#Dialog.question"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.Dialog.question" title="Permalink to this definition"></a></dt>
+<dd><p>Displays a question window in the User Interface.</p>
+<p>The user has to click either “OK” or “Cancel” in order to continue using the interface.
+Returns False if reply is “Cancel” and True if reply is “OK”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.Dialog.warning">
+<span class="sig-name descname"><span class="pre">warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Message</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">box'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#Dialog.warning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.Dialog.warning" title="Permalink to this definition"></a></dt>
+<dd><p>Warning message.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dbdicom.message.StatusBar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dbdicom.message.</span></span><span class="sig-name descname"><span class="pre">StatusBar</span></span><a class="reference internal" href="_modules/dbdicom/message.html#StatusBar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.StatusBar" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class with the same interface as StatusBar for use outside weasel.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.StatusBar.hide">
+<span class="sig-name descname"><span class="pre">hide</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#StatusBar.hide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.StatusBar.hide" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.StatusBar.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#StatusBar.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.StatusBar.message" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.StatusBar.mute">
+<span class="sig-name descname"><span class="pre">mute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#StatusBar.mute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.StatusBar.mute" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.StatusBar.progress">
+<span class="sig-name descname"><span class="pre">progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#StatusBar.progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.StatusBar.progress" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.message.StatusBar.unmute">
+<span class="sig-name descname"><span class="pre">unmute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/message.html#StatusBar.unmute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.message.StatusBar.unmute" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dbdicom.record">
+<span id="dbdicom-record-module"></span><h2>dbdicom.record module<a class="headerlink" href="#module-dbdicom.record" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dbdicom.record.</span></span><span class="sig-name descname"><span class="pre">DbRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">create</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Database'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.clear" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.copy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.copy_to">
+<span class="sig-name descname"><span class="pre">copy_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.copy_to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.copy_to" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.database">
+<span class="sig-name descname"><span class="pre">database</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.database" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.dialog">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dialog</span></span><a class="headerlink" href="#dbdicom.record.DbRecord.dialog" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.empty">
+<span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.empty" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.exists">
+<span class="sig-name descname"><span class="pre">exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.exists" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.export_as_csv">
+<span class="sig-name descname"><span class="pre">export_as_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.export_as_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.export_as_csv" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.export_as_dicom">
+<span class="sig-name descname"><span class="pre">export_as_dicom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.export_as_dicom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.export_as_dicom" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.export_as_nifti">
+<span class="sig-name descname"><span class="pre">export_as_nifti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.export_as_nifti"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.export_as_nifti" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.export_as_png">
+<span class="sig-name descname"><span class="pre">export_as_png</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.export_as_png"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.export_as_png" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.files">
+<span class="sig-name descname"><span class="pre">files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.files" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.get_dataset">
+<span class="sig-name descname"><span class="pre">get_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.get_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.get_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.get_values">
+<span class="sig-name descname"><span class="pre">get_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.get_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.get_values" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.images">
+<span class="sig-name descname"><span class="pre">images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sortby</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.images"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.images" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.instance">
+<span class="sig-name descname"><span class="pre">instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.instance" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.instances">
+<span class="sig-name descname"><span class="pre">instances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sortby</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.instances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.instances" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.key">
+<span class="sig-name descname"><span class="pre">key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.key" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.keys" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.label">
+<span class="sig-name descname"><span class="pre">label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.label" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.loc">
+<span class="sig-name descname"><span class="pre">loc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.loc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.loc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.message" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.move_to">
+<span class="sig-name descname"><span class="pre">move_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.move_to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.move_to" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.mute">
+<span class="sig-name descname"><span class="pre">mute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.mute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.mute" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.new_instance">
+<span class="sig-name descname"><span class="pre">new_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.new_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.new_instance" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.new_patient">
+<span class="sig-name descname"><span class="pre">new_patient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.new_patient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.new_patient" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.new_pibling">
+<span class="sig-name descname"><span class="pre">new_pibling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.new_pibling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.new_pibling" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.new_series">
+<span class="sig-name descname"><span class="pre">new_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.new_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.new_series" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.new_sibling">
+<span class="sig-name descname"><span class="pre">new_sibling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.new_sibling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.new_sibling" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.new_study">
+<span class="sig-name descname"><span class="pre">new_study</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.new_study"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.new_study" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.path">
+<span class="sig-name descname"><span class="pre">path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.path" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.patient">
+<span class="sig-name descname"><span class="pre">patient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.patient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.patient" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.patient_data">
+<span class="sig-name descname"><span class="pre">patient_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.patient_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.patient_data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.patients">
+<span class="sig-name descname"><span class="pre">patients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.patients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.patients" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.print">
+<span class="sig-name descname"><span class="pre">print</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.print"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.print" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.progress">
+<span class="sig-name descname"><span class="pre">progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.progress" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.read" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.read_dataframe">
+<span class="sig-name descname"><span class="pre">read_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.read_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.read_dataframe" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.record">
+<span class="sig-name descname"><span class="pre">record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Database'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.record" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.register">
+<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.register" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.remove">
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.remove" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.restore" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.save" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.series">
+<span class="sig-name descname"><span class="pre">series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.series" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.series_data">
+<span class="sig-name descname"><span class="pre">series_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.series_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.series_data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.sery">
+<span class="sig-name descname"><span class="pre">sery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.sery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.sery" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.set_dataset">
+<span class="sig-name descname"><span class="pre">set_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.set_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.set_dataset" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.set_values">
+<span class="sig-name descname"><span class="pre">set_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.set_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.set_values" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.siblings">
+<span class="sig-name descname"><span class="pre">siblings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.siblings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.siblings" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.status">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#dbdicom.record.DbRecord.status" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.studies">
+<span class="sig-name descname"><span class="pre">studies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.studies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.studies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.study">
+<span class="sig-name descname"><span class="pre">study</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.study"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.study" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.study_data">
+<span class="sig-name descname"><span class="pre">study_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.study_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.study_data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.type">
+<span class="sig-name descname"><span class="pre">type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.unmute">
+<span class="sig-name descname"><span class="pre">unmute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.unmute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.unmute" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dbdicom.record.DbRecord.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#DbRecord.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.DbRecord.write" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.record.copy_to">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.record.</span></span><span class="sig-name descname"><span class="pre">copy_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">records</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#copy_to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.copy_to" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.record.export_as_csv">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.record.</span></span><span class="sig-name descname"><span class="pre">export_as_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columnHeaders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#export_as_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.export_as_csv" title="Permalink to this definition"></a></dt>
+<dd><p>Export all images as csv files</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.record.export_as_nifti">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.record.</span></span><span class="sig-name descname"><span class="pre">export_as_nifti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#export_as_nifti"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.export_as_nifti" title="Permalink to this definition"></a></dt>
+<dd><p>Export all images as nifti files</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.record.export_as_png">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.record.</span></span><span class="sig-name descname"><span class="pre">export_as_png</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#export_as_png"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.export_as_png" title="Permalink to this definition"></a></dt>
+<dd><p>Export all images as png files</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.record.group">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.record.</span></span><span class="sig-name descname"><span class="pre">group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">records</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">into</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.group" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.record.merge">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.record.</span></span><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">records</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">into</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.merge" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.record.move_to">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.record.</span></span><span class="sig-name descname"><span class="pre">move_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">records</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#move_to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.move_to" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dbdicom.record.read_dataframe">
+<span class="sig-prename descclassname"><span class="pre">dbdicom.record.</span></span><span class="sig-name descname"><span class="pre">read_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dbdicom/record.html#read_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dbdicom.record.read_dataframe" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-dbdicom">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dbdicom" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, QIB-Sheffield.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
